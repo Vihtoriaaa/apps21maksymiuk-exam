@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Student extends BasicStudent {
     List<Tuple> subjects = new ArrayList();
+    private static int passedMark = 2;
 
     public Student(String name, String surname, Integer year, Tuple<String, Integer>... exams) {
         super(name, surname, year);
@@ -29,7 +30,7 @@ public class Student extends BasicStudent {
             JsonObject object = new JsonObject();
             object.add(new JsonPair("course", new JsonString(subjects.get(i).key.toString())));
             object.add(new JsonPair("mark", new JsonNumber((int)subjects.get(i).value)));
-            object.add(new JsonPair("passed", new JsonBoolean((int)subjects.get(i).value > 2)));
+            object.add(new JsonPair("passed", new JsonBoolean((int)subjects.get(i).value > passedMark)));
             allExams[i] = object;
         }
         JsonArray jasArr = new JsonArray(allExams);
